@@ -18,6 +18,7 @@
   --destructive-color: #ef4444;
   --destructive-foreground-color: #fafafa;
   --border-color: #e5e5e5;
+  --input-color: #d6d4d4;
   --radius-color: 0.5rem;
   
   --sidebar-background: #fafafa;
@@ -31,7 +32,7 @@
 }
 
 .dark {
-  --background-color: #09090B;
+  --background-color: #121212;
   --foreground-color: #fafafa;
   --popover-color: #0a0a0a;
   --popover-foreground-color: #fafafa;
@@ -46,6 +47,7 @@
   --destructive-color: #7f1d1d;
   --destructive-foreground-color: #fafafa;
   --border-color: #27272a;
+  --input-color: #4d4d4d;
   
   --sidebar-background: #191919;
   --sidebar-foreground: #f4f4f5;
@@ -75,6 +77,7 @@
   --color-destructive: var(--destructive-color);
   --color-destructive-foreground: var(--destructive-foreground-color);
   --color-border: var(--border-color);
+  --color-input: var(--input-color);
   --color-radius: var(--radius-color);
   
   --color-sidebar-background: var(--sidebar-background);

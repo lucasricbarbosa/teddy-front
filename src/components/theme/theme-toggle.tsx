@@ -2,7 +2,7 @@ import { LaptopMinimal, Moon, Sun } from "lucide-react";
 import { useTheme } from "./theme-provider";
 
 export function ThemeToggle() {
-  const { setTheme } = useTheme();
+  const { setTheme, theme } = useTheme();
 
   return (
     <div className="border-border flex w-fit items-center gap-0 rounded-full border bg-transparent">
@@ -14,6 +14,7 @@ export function ThemeToggle() {
           id="light"
           name="theme"
           className="peer sr-only"
+          checked={theme === "light"}
         />
         <label
           htmlFor="light"
@@ -31,6 +32,7 @@ export function ThemeToggle() {
           id="dark"
           name="theme"
           className="peer sr-only"
+          checked={theme === "dark"}
         />
         <label
           htmlFor="dark"
@@ -48,6 +50,7 @@ export function ThemeToggle() {
           id="system"
           name="theme"
           className="peer sr-only"
+          checked={theme === "system"}
         />
         <label
           htmlFor="system"

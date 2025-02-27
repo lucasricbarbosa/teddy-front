@@ -1,3 +1,3 @@
 export function Home() {
-  return <div>Home</div>;
+  return <div className="bg-background h-screen">Home</div>;
 }
