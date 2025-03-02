@@ -1,5 +1,6 @@
 import { LoginForm } from "../public/components/loginForm";
 import { TeddyLogo } from "../../components/teddyLogo";
+import teddyLoginBg from "../../assets/teddy-login-bg.png";
 export function LoginPage() {
   return (
     <div className="relative grid min-h-svh lg:grid-cols-[3fr_5fr]">
@@ -30,9 +31,9 @@ export function LoginPage() {
       </div>
       <div className="bg-muted relative hidden lg:block">
         <img
-          src="/placeholder.svg"
-          alt="Image"
-          className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+          src={teddyLoginBg}
+          alt="Photo of two men greeting each other"
+          className="absolute inset-0 h-full w-full object-cover"
         />
       </div>
     </div>

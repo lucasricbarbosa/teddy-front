@@ -1,4 +1,4 @@
-import { ChevronLeft, LogOut, LucideIcon } from "lucide-react";
+import { ChevronLeft, LucideIcon } from "lucide-react";
 import { useSidebar } from "./sidebar-root";
 import { createElement, ReactNode } from "react";
 import { cn } from "../../../utils/tailwind-merge";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import whiteTeddyLogo from "../../../assets/white-teddy-logo.webp";
 import { Button } from "../button";
 import { ThemeToggle } from "../../theme/theme-toggle";
+import { ExitModal } from "../../exit-modal";
 
 export function SidebarContent({ children }: { children: ReactNode }) {
   const { isOpen } = useSidebar();
@@ -93,13 +94,7 @@ export function SidebarBody({
 export function SidebarFooter() {
   return (
     <div className="flex items-center justify-between p-3">
-      <Button
-        className="bg-sidebar-background cursor-pointer"
-        variant={"outline"}
-      >
-        <LogOut className="size-4" />
-        Sair
-      </Button>
+      <ExitModal variant="button" />
       <ThemeToggle />
     </div>
   );

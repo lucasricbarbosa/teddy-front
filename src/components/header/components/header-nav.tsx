@@ -1,16 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "../../../utils/tailwind-merge";
+import { ExitModal } from "../../exit-modal";
+import { links } from "../header";
 
-interface LinksProps {
-  name: string;
-  url: string;
-}
-
-interface HeaderNavProps {
-  links: LinksProps[];
-}
-
-export function HeaderNav({ links }: HeaderNavProps) {
+export function HeaderNav() {
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -36,6 +29,7 @@ export function HeaderNav({ links }: HeaderNavProps) {
             </li>
           );
         })}
+        <ExitModal variant="menu-item" />
       </ul>
     </nav>
   );

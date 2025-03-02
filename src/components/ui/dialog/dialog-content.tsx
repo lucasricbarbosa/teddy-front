@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useDialog } from "./dialog-root";
 import { Portal } from "../portal";
 import { cn } from "../../../utils/tailwind-merge";
+import { Button } from "../button";
+import { X } from "lucide-react";
 
 interface DialogContentProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: "start" | "end" | "center";
@@ -74,7 +76,7 @@ export function DialogContent({
       <div
         ref={contentRef}
         className={cn(
-          "bg-background absolute z-50 min-w-[8rem] overflow-hidden rounded-md border p-1 shadow-md",
+          "bg-background border-border relative z-50 min-w-[425px] overflow-hidden rounded-md border p-1 shadow-md",
           "animate-in fade-in-0 zoom-in-95",
           "data-[side=bottom]:slide-in-from-top-2",
           "data-[side=top]:slide-in-from-bottom-2",
@@ -86,6 +88,13 @@ export function DialogContent({
         }}
         {...props}
       >
+        <Button
+          variant="ghost"
+          className="absolute top-4 right-4 h-fit w-fit cursor-pointer p-0 hover:bg-transparent"
+          onClick={() => setOpen(false)}
+        >
+          <X className="text-muted-foreground hover:text-foreground size-4" />
+        </Button>
         {children}
       </div>
     </Portal>

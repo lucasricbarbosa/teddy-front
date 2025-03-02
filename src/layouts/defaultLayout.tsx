@@ -6,7 +6,6 @@ export function DefaultLayout() {
     <>
       <Header />
       <Outlet />
-      <footer>FOOTER</footer>
     </>
   );
 }
