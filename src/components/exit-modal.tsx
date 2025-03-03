@@ -1,6 +1,6 @@
 import { LogOut } from "lucide-react";
 import { Button } from "./ui/button";
-import { DialogTemplate } from "./ui/dialog";
+import { DialogTemplate } from "./ui/dialog/_index";
 import { useAuth } from "../hooks/useAuth";
 
 interface ExitModalProps {

@@ -1,11 +1,47 @@
-import { Plus } from "lucide-react";
-import { Button } from "../../components/ui/button";
+import { ClientCard } from "../../components/clients/ClientsCard/clients-card";
 
-const client = {
-  name: "Eduardo",
-  balance: "R$3.500,00",
-  companyId: "58120.100.00",
-};
+const clients = [
+  {
+    name: "Eduardo",
+    balance: "R$3.500,00",
+    companyId: "58120.100.00",
+  },
+  {
+    name: "Lucas Ricardo",
+    balance: "R$3.500,00",
+    companyId: "58120.100.00",
+  },
+  {
+    name: "Mariana Souza",
+    balance: "R$2.150,00",
+    companyId: "58120.100.01",
+  },
+  {
+    name: "Roberto Fernandes",
+    balance: "R$5.800,00",
+    companyId: "58120.100.02",
+  },
+  {
+    name: "Carla Mendes",
+    balance: "R$1.200,00",
+    companyId: "58120.100.03",
+  },
+  {
+    name: "Fernando Oliveira",
+    balance: "R$7.400,00",
+    companyId: "58120.100.04",
+  },
+  {
+    name: "Tatiane Lima",
+    balance: "R$3.000,00",
+    companyId: "58120.100.05",
+  },
+  {
+    name: "Gustavo Henrique",
+    balance: "R$6.900,00",
+    companyId: "58120.100.06",
+  },
+];
 
 export interface ClientItemProps {
   name: string;
@@ -30,40 +66,11 @@ export function Clients() {
           </select>
         </div>
       </div>
-      <div className="mt-5 grid grid-cols-3 gap-8">
-        {Array.from({ length: 10 }).map((_, index) => (
+      <div className="mt-5 grid grid-cols-1 gap-5 min-[464px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {clients.map((client, index) => (
           <ClientCard client={client} key={index} />
         ))}
       </div>
     </main>
-  );
-}
-
-interface ClientCardProps {
-  client: ClientItemProps;
-}
-
-function ClientCard({ client }: ClientCardProps) {
-  return (
-    <div className="border-border flex items-center gap-4 rounded border p-4 hover:shadow">
-      <Button size={"icon"} className="rounded-full" variant={"secondary"}>
-        <Plus className="size-4" />
-      </Button>
-      <div className="flex flex-col gap-1">
-        <span className="text-foreground text-lg font-medium">
-          {client.name}
-        </span>
-        <div>
-          <p className="text-muted-foreground text-sm">
-            <span className="text-foreground font-medium">Saldo:</span>{" "}
-            {client.balance}
-          </p>
-          <p className="text-muted-foreground text-sm">
-            <span className="text-foreground font-medium">Empresa:</span>{" "}
-            {client.companyId}
-          </p>
-        </div>
-      </div>
-    </div>
   );
 }

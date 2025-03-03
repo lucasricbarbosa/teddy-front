@@ -66,7 +66,7 @@ export function SidebarBody({
     <nav className="h-full p-3 pt-10">
       <ul className="space-y-2">
         {items.map(({ title, url, icon, subitems }) => (
-          <li>
+          <li key={title}>
             <Link
               to={url}
               className="hover:bg-sidebar-accent flex items-center gap-2 rounded p-2 transition-colors duration-200"

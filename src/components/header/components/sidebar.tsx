@@ -5,7 +5,7 @@ import {
   ListCheck,
   UsersRound,
 } from "lucide-react";
-import { SidebarTemplate } from "../../ui/sidebar";
+import { SidebarTemplate } from "../../ui/sidebar/_index";
 
 const data = {
   items: [
