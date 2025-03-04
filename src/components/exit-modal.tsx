@@ -1,6 +1,6 @@
 import { LogOut } from "lucide-react";
 import { Button } from "./ui/button";
-import { DialogTemplate } from "./ui/dialog/_index";
+import { DialogTemplate } from "../components/ui/dialog/_index";
 import { useAuth } from "../hooks/useAuth";
 
 interface ExitModalProps {
@@ -18,7 +18,7 @@ export function ExitModal({ variant = "button" }: ExitModalProps) {
     <div className="h-fit">
       <DialogTemplate.Root>
         {variant === "button" && (
-          <DialogTemplate.Trigger className="bg-sidebar-background hover:bg-accent border-border text-muted-foreground flex h-9 cursor-pointer items-center gap-2 dark:text-white">
+          <DialogTemplate.Trigger className="bg-sidebar-background hover:bg-accent border-border text-muted-foreground flex h-9 cursor-pointer items-center gap-2">
             <LogOut className="size-4" />
             Sair
           </DialogTemplate.Trigger>
@@ -39,8 +39,8 @@ export function ExitModal({ variant = "button" }: ExitModalProps) {
               </p>
             </div>
             <div className="flex justify-end gap-2 pt-2">
-              <DialogTemplate.Trigger className="border-border hover:bg-accent h-9 cursor-pointer border bg-transparent text-white transition-all">
-                Cancelar
+              <DialogTemplate.Trigger className="border-border hover:bg-accent text-foreground h-9 cursor-pointer border bg-transparent transition-all">
+                <span>Cancelar</span>
               </DialogTemplate.Trigger>
               <Button
                 className="cursor-pointer"
