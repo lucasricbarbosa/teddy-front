@@ -32,7 +32,7 @@ export function SidebarHeader() {
       <img className="w-24" src={whiteTeddyLogo} alt="Logo da Teddy" />
       <Button
         className={cn(
-          "group hidden cursor-pointer transition-all duration-300 ease-in-out md:block",
+          "group hidden cursor-pointer transition-all duration-300 ease-in-out md:flex",
           isOpen
             ? "bg-foreground text-background visible absolute -right-5 -bottom-5 size-10 rounded-full p-0 opacity-100 shadow"
             : "invisible size-0 opacity-0",

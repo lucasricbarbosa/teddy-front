@@ -10,11 +10,25 @@ export interface ClientProps {
   isSelected: boolean;
 }
 
+export interface PaginationData {
+  total: number;
+  totalPages: number;
+  currentPage: number;
+  limit: number;
+  hasNext: boolean;
+  hasPrevious: boolean;
+}
+
+export interface ClientsResponse {
+  clients: ClientProps[];
+  selectedClients: ClientProps[];
+  pagination: PaginationData;
+}
+
 export interface ClientGETPropsRequest {
-  id?: number;
+  page?: number;
+  limit?: number;
   name?: string;
-  companyValue?: number;
-  salary?: number;
   isSelected?: boolean;
 }
 
@@ -37,7 +51,7 @@ const clients = async (data: ClientGETPropsRequest) => {
 };
 
 export function useClientsGET(data: ClientGETPropsRequest) {
-  const queryDetails = useQuery<ClientProps[]>({
+  const queryDetails = useQuery<ClientsResponse>({
     queryFn: () => clients(data),
     queryKey: ["clients", data],
   });

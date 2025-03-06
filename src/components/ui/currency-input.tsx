@@ -6,6 +6,7 @@ interface CurrencyInputProps {
   onChange: (value: number) => void;
   placeholder?: string;
   id?: string;
+  disabled?: boolean;
 }
 
 export function CurrencyInput({
@@ -13,6 +14,7 @@ export function CurrencyInput({
   onChange,
   id,
   placeholder = "Digite o valor",
+  disabled = false,
 }: CurrencyInputProps) {
   const [displayValue, setDisplayValue] = useState<string>("");
 
@@ -63,6 +65,7 @@ export function CurrencyInput({
         className="pl-9"
         aria-label="Currency input"
         id={id}
+        disabled={disabled}
       />
       <span className="text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2 text-sm">
         R$

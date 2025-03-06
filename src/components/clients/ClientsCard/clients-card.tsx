@@ -1,10 +1,12 @@
-import { Plus, Pencil, Trash2, TriangleAlert } from "lucide-react";
+import { Plus, Pencil } from "lucide-react";
 import { Button } from "../../ui/button";
 import { TooltipTemplate } from "../../ui/tooltip/_index";
 import { DialogTemplate } from "../../ui/dialog/_index";
 import { EditClientForm } from "./components/edit-client-form";
 import { ClientProps } from "../../../hooks/clients/useClientsGET";
 import { formatMoney } from "../../../utils/formatMoney";
+import { useClientContext } from "./context/clientContext";
+import { DeleteClientButton } from "./components/delete-client-buttons";
 
 interface ClientCardProps {
   client: ClientProps;
@@ -14,7 +16,7 @@ export function ClientCard({ client }: ClientCardProps) {
   return (
     <div className="border-border flex flex-col items-center justify-center gap-2 rounded border p-4">
       <div className="pb-0.5">
-        <h3 className="text-base font-bold">{client.name}</h3>
+        <h3 className="line-clamp-2 text-base font-bold">{client.name}</h3>
       </div>
       <div className="flex flex-col items-center justify-center gap-1">
         <span className="text-sm">Salário: {formatMoney(client.salary)}</span>
@@ -22,17 +24,17 @@ export function ClientCard({ client }: ClientCardProps) {
           Empresa: {formatMoney(client.companyValue)}
         </span>
       </div>
-      <ClientsCardFooter />
+      <ClientsCardFooter client={client} />
     </div>
   );
 }
 
-function ClientsCardFooter() {
+function ClientsCardFooter({ client }: { client: ClientProps }) {
   return (
     <div className="flex w-full items-center justify-between">
       <SelectClientButton />
-      <EditClientButton />
-      <DeleteClientButton />
+      <EditClientButton client={client} />
+      <DeleteClientButton client={client} />
     </div>
   );
 }
@@ -53,13 +55,20 @@ function SelectClientButton() {
   );
 }
 
-function EditClientButton() {
+function EditClientButton({ client }: { client: ClientProps }) {
+  const { setSelectedClient } = useClientContext();
+
   return (
     <TooltipTemplate.Root>
       <TooltipTemplate.Trigger>
         <DialogTemplate.Root>
-          <DialogTemplate.Trigger className="group hover:bg-muted size-7 cursor-pointer rounded-full border-none bg-transparent p-1.5">
-            <Pencil className="text-foreground size-5" />
+          <DialogTemplate.Trigger className="group hover:bg-muted size-7 cursor-pointer rounded-full border-none bg-transparent p-0">
+            <div
+              className="flex h-7 items-center justify-center p-1.5"
+              onClick={() => setSelectedClient(client)}
+            >
+              <Pencil className="text-foreground size-[18px]" />
+            </div>
           </DialogTemplate.Trigger>
           <DialogTemplate.Content className="max-w-[400px] p-4">
             <DialogTemplate.Header>
@@ -70,40 +79,6 @@ function EditClientButton() {
         </DialogTemplate.Root>
       </TooltipTemplate.Trigger>
       <TooltipTemplate.Content text="Editar cliente" />
-    </TooltipTemplate.Root>
-  );
-}
-
-function DeleteClientButton() {
-  return (
-    <TooltipTemplate.Root>
-      <TooltipTemplate.Trigger>
-        <DialogTemplate.Root>
-          <DialogTemplate.Trigger className="group size-7 cursor-pointer rounded-full border-none bg-transparent p-1.5 hover:bg-red-600">
-            <Trash2 className="size-5 text-red-600 transition-all group-hover:text-white" />
-          </DialogTemplate.Trigger>
-          <DialogTemplate.Content className="max-w-[400px] p-4">
-            <DialogTemplate.Header>
-              <h3 className="text-lg font-semibold">Excluir cliente</h3>
-            </DialogTemplate.Header>
-            <div className="pt-2 pb-2">
-              Você está prestes a excluir o cliente: Eduardo
-            </div>
-            <DialogTemplate.Footer>
-              <div className="flex justify-end gap-2 pt-2">
-                <DialogTemplate.Trigger className="border-border hover:bg-accent dark:text-foreground h-9 cursor-pointer border bg-transparent text-white transition-all">
-                  Cancelar
-                </DialogTemplate.Trigger>
-                <Button className="cursor-pointer" variant="destructive">
-                  <TriangleAlert className="size-4" />
-                  Confirmar
-                </Button>
-              </div>
-            </DialogTemplate.Footer>
-          </DialogTemplate.Content>
-        </DialogTemplate.Root>
-      </TooltipTemplate.Trigger>
-      <TooltipTemplate.Content text="Excluir cliente" />
     </TooltipTemplate.Root>
   );
 }

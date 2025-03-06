@@ -1,18 +1,27 @@
+import { CircleOff } from "lucide-react";
 import { ClientCard } from "../../components/clients/ClientsCard/clients-card";
 import { CreateClientButton } from "../../components/clients/CreateClient/create-client-button";
 import { Skeleton } from "../../components/ui/skeleton";
 import { useClientsGET } from "../../hooks/clients/useClientsGET";
 
 export function Clients() {
-  const { data: clients, isLoading, isSuccess } = useClientsGET({});
+  const { data, isLoading, isSuccess } = useClientsGET({
+    page: 1,
+    limit: 10,
+    isSelected: false,
+  });
 
   return (
     <main className="mx-auto min-h-[calc(100dvh-90px)] max-w-7xl p-5">
       <div className="flex items-center justify-between gap-5">
-        <div className="flex items-center gap-1">
-          <strong>16</strong>
-          <p>clientes encontrados</p>
-        </div>
+        {isSuccess ? (
+          <div className="flex items-center gap-1">
+            <strong>{data.clients.length}</strong>
+            <p>clientes encontrados</p>
+          </div>
+        ) : (
+          <Skeleton className="h-6 w-[180px]" />
+        )}
         <div>
           <form className="flex items-center gap-2">
             <label
@@ -34,22 +43,33 @@ export function Clients() {
           </form>
         </div>
       </div>
-      <div className="mt-5 grid grid-cols-1 gap-5 min-[464px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {isLoading && (
-          <>
-            {Array.from({ length: 8 }).map((_, index) => (
-              <Skeleton className="h-40 w-full" key={index} />
-            ))}
-          </>
-        )}
-        {isSuccess && (
-          <>
-            {clients.map((client, index) => (
-              <ClientCard client={client} key={index} />
-            ))}
-          </>
-        )}
-      </div>
+      {isLoading && (
+        <div className="mt-5 grid grid-cols-1 gap-5 overflow-x-hidden min-[464px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {Array.from({ length: 8 }).map((_, index) => (
+            <Skeleton className="h-40 w-full" key={index} />
+          ))}
+        </div>
+      )}
+
+      {isSuccess && (
+        <>
+          {data.clients.length === 0 ? (
+            <div className="text-muted-foreground border-border mt-5 flex w-full flex-col items-center justify-center gap-2 rounded border px-5 py-16 font-medium">
+              <CircleOff className="size-5" />
+              <span>Nenhum cliente cadastrado</span>
+            </div>
+          ) : (
+            data.clients.map((client, index) => (
+              <div
+                key={client.id}
+                className="mt-5 grid grid-cols-1 gap-5 overflow-x-hidden min-[464px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+              >
+                <ClientCard client={client} key={index} />
+              </div>
+            ))
+          )}
+        </>
+      )}
       <div className="py-5">
         <CreateClientButton />
       </div>
