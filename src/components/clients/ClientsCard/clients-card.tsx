@@ -1,12 +1,13 @@
 import { Plus, Pencil, Trash2, TriangleAlert } from "lucide-react";
-import { ClientItemProps } from "../../../pages/auth/clients";
 import { Button } from "../../ui/button";
 import { TooltipTemplate } from "../../ui/tooltip/_index";
 import { DialogTemplate } from "../../ui/dialog/_index";
 import { EditClientForm } from "./components/edit-client-form";
+import { ClientProps } from "../../../hooks/clients/useClientsGET";
+import { formatMoney } from "../../../utils/formatMoney";
 
 interface ClientCardProps {
-  client: ClientItemProps;
+  client: ClientProps;
 }
 
 export function ClientCard({ client }: ClientCardProps) {
@@ -16,8 +17,10 @@ export function ClientCard({ client }: ClientCardProps) {
         <h3 className="text-base font-bold">{client.name}</h3>
       </div>
       <div className="flex flex-col items-center justify-center gap-1">
-        <span className="text-sm">Salário: {client.balance}</span>
-        <span className="text-sm">Empresa: {client.companyId}</span>
+        <span className="text-sm">Salário: {formatMoney(client.salary)}</span>
+        <span className="text-sm">
+          Empresa: {formatMoney(client.companyValue)}
+        </span>
       </div>
       <ClientsCardFooter />
     </div>

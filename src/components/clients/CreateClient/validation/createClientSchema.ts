@@ -7,7 +7,7 @@ export const createClientSchema = z.object({
     .max(50, "O nome deve ter no máximo 50 caracteres"),
   companyValue: z.number().min(1, "O valor da empresa deve ser maior que 0"),
   salary: z.number().min(1, "O valor da empresa deve ser maior que 0"),
-  selected: z.boolean(),
+  isSelected: z.boolean(),
 });
 
 export type CreateClientType = z.infer<typeof createClientSchema>;

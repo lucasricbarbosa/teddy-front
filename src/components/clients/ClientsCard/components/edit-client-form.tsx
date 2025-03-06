@@ -8,6 +8,10 @@ import {
 import { Button } from "../../../ui/button";
 import { CurrencyInput } from "../../../ui/currency-input";
 
+// interface EditClientFormProps {
+//   clientID: number;
+// }
+
 export function EditClientForm() {
   const {
     register,
