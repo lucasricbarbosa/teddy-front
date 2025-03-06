@@ -6,20 +6,52 @@ import { Button } from "../button";
 import { X } from "lucide-react";
 
 interface DialogContentProps extends React.HTMLAttributes<HTMLDivElement> {
-  align?: "start" | "end" | "center";
-  sideOffset?: number;
+  className?: string;
 }
 
 export function DialogContent({
-  align = "end",
-  sideOffset = 4,
   className,
   children,
   ...props
 }: DialogContentProps) {
   const { open, setOpen, triggerRef } = useDialog();
   const contentRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ top: 0, left: 0 });
+  const [mounted, setMounted] = useState(false);
+
+  const [animationState, setAnimationState] = useState<
+    "entering" | "entered" | "exiting" | "exited"
+  >("exited");
+
+  useEffect(() => {
+    if (open && animationState === "exited") {
+      setAnimationState("entering");
+      setTimeout(() => {
+        setAnimationState("entered");
+      }, 10);
+    } else if (
+      !open &&
+      (animationState === "entered" || animationState === "entering")
+    ) {
+      setAnimationState("exiting");
+      setTimeout(() => {
+        setAnimationState("exited");
+      }, 300);
+      // Duração da animação, para dar uma abertura mais suave ao modal
+      // Fiz isso para ser mais semelhante ao modal do Chakra UI
+    }
+  }, [open, animationState]);
+
+  useEffect(() => {
+    if (open) {
+      setMounted(true);
+    }
+  }, [open]);
+
+  useEffect(() => {
+    if (animationState === "exited" && !open) {
+      setMounted(false);
+    }
+  }, [animationState, open]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -34,68 +66,47 @@ export function DialogContent({
       }
     };
 
-    const updatePosition = () => {
-      if (triggerRef.current && contentRef.current) {
-        const triggerRect = triggerRef.current.getBoundingClientRect();
-        const contentRect = contentRef.current.getBoundingClientRect();
-
-        let left = 0;
-        if (align === "end") {
-          left = triggerRect.right - contentRect.width;
-        } else if (align === "start") {
-          left = triggerRect.left;
-        } else {
-          left = triggerRect.left + (triggerRect.width - contentRect.width) / 2;
-        }
-
-        setPosition({
-          top: triggerRect.bottom + sideOffset + window.scrollY,
-          left: left + window.scrollX,
-        });
-      }
-    };
-
-    if (open) {
+    if (mounted) {
       document.addEventListener("mousedown", handleClickOutside);
-      updatePosition();
-      window.addEventListener("resize", updatePosition);
-      window.addEventListener("scroll", updatePosition);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
-      window.removeEventListener("resize", updatePosition);
-      window.removeEventListener("scroll", updatePosition);
     };
-  }, [open, setOpen, align, sideOffset, triggerRef]);
+  }, [mounted, setOpen, triggerRef]);
 
-  if (!open) return null;
+  if (!mounted) return null;
 
   return (
     <Portal>
       <div
-        ref={contentRef}
         className={cn(
-          "bg-background border-border relative z-50 min-w-[425px] overflow-hidden rounded-md border p-1 shadow-md",
-          "animate-in fade-in-0 zoom-in-95",
-          "data-[side=bottom]:slide-in-from-top-2",
-          "data-[side=top]:slide-in-from-bottom-2",
-          className,
+          "fixed inset-0 z-50 flex items-center justify-center bg-black/75 transition-opacity duration-300",
+          animationState === "entering" ? "opacity-0" : "",
+          animationState === "entered" ? "opacity-100" : "",
+          animationState === "exiting" ? "opacity-0" : "",
         )}
-        style={{
-          top: `${position.top}px`,
-          left: `${position.left}px`,
-        }}
-        {...props}
       >
-        <Button
-          variant="ghost"
-          className="absolute top-4 right-4 h-fit w-fit cursor-pointer p-0 hover:bg-transparent"
-          onClick={() => setOpen(false)}
+        <div
+          ref={contentRef}
+          className={cn(
+            "bg-background border-border relative z-50 min-w-[425px] overflow-hidden rounded-md border p-1 shadow-md transition-all duration-300",
+            animationState === "entering" ? "scale-95 opacity-0" : "",
+            animationState === "entered" ? "scale-100 opacity-100" : "",
+            animationState === "exiting" ? "scale-95 opacity-0" : "",
+            className,
+          )}
+          {...props}
         >
-          <X className="text-muted-foreground hover:text-foreground size-4" />
-        </Button>
-        {children}
+          <Button
+            variant="ghost"
+            className="absolute top-4 right-4 h-fit w-fit cursor-pointer p-0 hover:bg-transparent"
+            onClick={() => setOpen(false)}
+          >
+            <X className="text-muted-foreground hover:text-foreground size-4" />
+          </Button>
+          {children}
+        </div>
       </div>
     </Portal>
   );
