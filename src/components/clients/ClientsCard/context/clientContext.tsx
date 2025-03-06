@@ -1,5 +1,6 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { ClientProps } from "../../../../hooks/clients/useClientsGET";
+import { Outlet } from "react-router-dom";
 
 interface ClientContextType {
   selectedClient: ClientProps | null;
@@ -18,7 +19,7 @@ export function useClientContext() {
   return context;
 }
 
-export function ClientProvider({ children }: { children: ReactNode }) {
+export function ClientProvider() {
   const [selectedClient, setSelectedClient] = useState<ClientProps | null>(
     null,
   );
@@ -29,6 +30,8 @@ export function ClientProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <ClientContext.Provider value={value}>{children}</ClientContext.Provider>
+    <ClientContext.Provider value={value}>
+      <Outlet />
+    </ClientContext.Provider>
   );
 }

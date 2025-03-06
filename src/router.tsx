@@ -3,6 +3,7 @@ import { DefaultLayout } from "./layouts/defaultLayout";
 import { Clients } from "./pages/auth/clients";
 import { LoginPage } from "./pages/public/login";
 import { ClientProvider } from "./components/clients/ClientsCard/context/clientContext";
+import { SelectedClients } from "./pages/auth/selected-clients";
 
 export const router = createBrowserRouter([
   {
@@ -11,11 +12,17 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: (
-          <ClientProvider>
-            <Clients />
-          </ClientProvider>
-        ),
+        Component: ClientProvider,
+        children: [
+          {
+            path: "/",
+            element: <Clients />,
+          },
+          {
+            path: "/clientes-selecionados",
+            element: <SelectedClients />,
+          },
+        ],
       },
     ],
   },

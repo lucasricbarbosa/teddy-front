@@ -14,7 +14,7 @@ export function SidebarContent({ children }: { children: ReactNode }) {
   return (
     <aside
       id="sidebar"
-      className={`bg-sidebar-background text-sidebar-foreground fixed top-0 right-0 z-40 flex h-screen w-64 transform flex-col justify-between rounded-l-xl transition-transform duration-300 ease-in-out md:left-0 md:rounded-r-xl ${
+      className={`bg-sidebar-background text-sidebar-foreground fixed top-0 right-0 z-40 flex h-screen w-64 transform flex-col justify-between rounded-l-xl transition-transform duration-300 ease-in-out md:left-0 md:rounded-l-none md:rounded-r-xl ${
         isOpen ? "translate-x-0" : "translate-x-full md:-translate-x-full"
       }`}
       aria-hidden={!isOpen}
@@ -28,7 +28,7 @@ export function SidebarHeader() {
   const { isOpen, setIsOpen } = useSidebar();
 
   return (
-    <div className="relative flex items-center justify-center rounded-l-xl bg-zinc-800 py-10 md:rounded-r-xl">
+    <div className="relative flex items-center justify-center rounded-l-xl bg-zinc-800 py-10 md:rounded-l-none md:rounded-r-xl">
       <img className="w-24" src={whiteTeddyLogo} alt="Logo da Teddy" />
       <Button
         className={cn(
