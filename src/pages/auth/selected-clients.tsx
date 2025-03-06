@@ -1,11 +1,11 @@
 import { CircleOff } from "lucide-react";
 import { ClientCard } from "../../components/clients/ClientsCard/clients-card";
-import { CreateClientButton } from "../../components/clients/CreateClient/create-client-button";
 import { Skeleton } from "../../components/ui/skeleton";
 import { useClientsGET } from "../../hooks/clients/useClientsGET";
 import { useState } from "react";
 import { Pagination } from "../../components/ui/pagination";
 import { ClientsPerPageSelector } from "../../components/ui/clients-per-page-selector";
+import { UnselectAllClientsButton } from "../../components/clients/ClientsCard/components/unselect-all-clients-button";
 
 export function SelectedClients() {
   const [page, setPage] = useState(1);
@@ -64,7 +64,7 @@ export function SelectedClients() {
         </>
       )}
       <div className="py-5">
-        <CreateClientButton />
+        <UnselectAllClientsButton />
       </div>
       <div>
         {isSuccess && (

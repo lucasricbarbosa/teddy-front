@@ -1,17 +1,17 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Input } from "../../../ui/input";
+import { Input } from "../../../../ui/input";
 import {
   editClientSchema,
   EditClientType,
-} from "../validation/editClientSchema";
-import { Button } from "../../../ui/button";
-import { CurrencyInput } from "../../../ui/currency-input";
-import { useClientContext } from "../context/clientContext";
-import { useClientGET } from "../../../../hooks/clients/useClientGET";
+} from "../../validation/editClientSchema";
+import { Button } from "../../../../ui/button";
+import { CurrencyInput } from "../../../../ui/currency-input";
+import { useClientContext } from "../../context/clientContext";
+import { useClientGET } from "../../../../../hooks/clients/useClientGET";
 import { useEffect } from "react";
-import { useClientPATCH } from "../../../../hooks/clients/useClientPATH";
-import { useDialog } from "../../../ui/dialog/dialog-root";
+import { useClientPATCH } from "../../../../../hooks/clients/useClientPATH";
+import { useDialog } from "../../../../ui/dialog/dialog-root";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 

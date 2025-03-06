@@ -3,22 +3,36 @@ import { ClientCard } from "../../components/clients/ClientsCard/clients-card";
 import { CreateClientButton } from "../../components/clients/CreateClient/create-client-button";
 import { Skeleton } from "../../components/ui/skeleton";
 import { useClientsGET } from "../../hooks/clients/useClientsGET";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pagination } from "../../components/ui/pagination";
 import { ClientsPerPageSelector } from "../../components/ui/clients-per-page-selector";
+import { Input } from "../../components/ui/input";
 
 export function Clients() {
   const [page, setPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
 
   const [clientsPerPage, setClientsPerPage] = useState<number>(() => {
     const savedValue = localStorage.getItem("clientsPerPage");
     return savedValue ? Number(savedValue) : 8;
   });
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchTerm]);
+
   const { data, isLoading, isSuccess } = useClientsGET({
     page: page,
     limit: clientsPerPage,
     isSelected: false,
+    name: debouncedSearchTerm,
   });
 
   const handleClientsPerPageChange = (value: number) => {
@@ -38,6 +52,15 @@ export function Clients() {
         isLoading={isLoading}
         onChange={handleClientsPerPageChange}
       />
+      <div className="mt-5 flex flex-col gap-1">
+        <span className="text-sm font-medium">Pesquisar por nome:</span>
+        <Input
+          placeholder="Nome do cliente"
+          className="h-7 w-56 text-sm"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       {isLoading && (
         <div className="mt-5 grid grid-cols-1 gap-5 overflow-x-hidden min-[464px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {Array.from({ length: 8 }).map((_, index) => (
