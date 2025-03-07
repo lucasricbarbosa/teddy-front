@@ -4,6 +4,7 @@ import { Clients } from "./pages/auth/clients";
 import { LoginPage } from "./pages/public/login";
 import { ClientProvider } from "./components/clients/ClientsCard/context/clientContext";
 import { SelectedClients } from "./pages/auth/selected-clients";
+import { HomePage } from "./pages/public/home";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,15 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <LoginPage />,
+      },
+    ],
+  },
+  {
+    path: "/home",
+    children: [
+      {
+        path: "/home",
+        element: <HomePage />,
       },
     ],
   },

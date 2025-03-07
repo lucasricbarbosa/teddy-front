@@ -4,7 +4,7 @@ dotenv.config();
 
 test.describe("Login", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(`${process.env.VITE_FRONT_HOST!}/login`);
+    await page.goto(`${process.env.FRONT_HOST!}/login`);
   });
 
   test("should login and store user name in localStorage", async ({ page }) => {
@@ -15,7 +15,7 @@ test.describe("Login", () => {
 
     await page.getByRole("button", { name: "Entrar" }).click();
 
-    await page.waitForURL(process.env.VITE_FRONT_HOST!);
+    await page.waitForURL(process.env.FRONT_HOST!);
 
     const user = await page.evaluate(() => localStorage.getItem("user"));
     expect(user).toBe(nomeUsuario);
@@ -28,7 +28,7 @@ test.describe("Login", () => {
 
     await expect(page.locator('button[data-isloading="true"]')).toBeDisabled();
 
-    await page.waitForURL(process.env.VITE_FRONT_HOST!);
+    await page.waitForURL(process.env.FRONT_HOST!);
   });
 
   test("should redirect to home page after login", async ({ page }) => {
@@ -36,6 +36,6 @@ test.describe("Login", () => {
 
     await page.getByRole("button", { name: "Entrar" }).click();
 
-    await page.waitForURL(process.env.VITE_FRONT_HOST!);
+    await page.waitForURL(process.env.FRONT_HOST!);
   });
 });
