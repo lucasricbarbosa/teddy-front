@@ -2,7 +2,7 @@ import { ChevronLeft, LucideIcon } from "lucide-react";
 import { useSidebar } from "./sidebar-root";
 import { createElement, ReactNode } from "react";
 import { cn } from "../../../utils/tailwind-merge";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import whiteTeddyLogo from "../../../assets/white-teddy-logo.webp";
 import { Button } from "../button";
 import { ThemeToggle } from "../../theme/theme-toggle";
@@ -55,37 +55,45 @@ export function SidebarBody({
     title: string;
     url: string;
     icon?: LucideIcon;
-    subitems?: {
-      title: string;
-      url: string;
-      icon?: LucideIcon;
-    }[];
   }[];
 }) {
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const { isOpen } = useSidebar();
+
+  console.log(currentPath);
+
   return (
     <nav className="h-full p-3 pt-10">
       <ul className="space-y-2">
-        {items.map(({ title, url, icon, subitems }) => (
-          <li key={title}>
-            <Link
-              to={url}
-              className="hover:bg-sidebar-accent flex items-center gap-2 rounded p-2 transition-colors duration-200"
-            >
-              {icon &&
-                createElement(icon, {
-                  className: cn("text-foreground size-4"),
-                })}
-              <span className="block truncate overflow-hidden text-sm">
-                {title}
-                {subitems && (
-                  <span className="text-muted-foreground ml-2 text-xs">
-                    ({subitems.length})
-                  </span>
+        {items.map(({ title, url, icon }) => {
+          const isActive = currentPath === url;
+          return (
+            <li key={title}>
+              <Link
+                to={url}
+                className={cn(
+                  "hover:bg-sidebar-accent relative flex items-center gap-2 rounded p-2 transition-colors duration-200",
+                  isActive && "text-primary font-medium",
                 )}
-              </span>
-            </Link>
-          </li>
-        ))}
+              >
+                {isActive && isOpen && (
+                  <div className="bg-primary absolute top-0 -left-3.5 h-full w-1.5 rounded md:-right-3.5 md:left-auto" />
+                )}
+                {icon &&
+                  createElement(icon, {
+                    className: cn(
+                      "text-foreground size-4",
+                      isActive && "text-primary",
+                    ),
+                  })}
+                <span className="block truncate overflow-hidden text-sm">
+                  {title}
+                </span>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );

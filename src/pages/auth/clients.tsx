@@ -21,6 +21,7 @@ export function Clients() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearchTerm(searchTerm);
+      setPage(1);
     }, 500);
 
     return () => {
@@ -89,6 +90,12 @@ export function Clients() {
         <CreateClientButton />
       </div>
       <div>
+        {isLoading && (
+          <div className="flex w-full items-center justify-between gap-2">
+            <Skeleton className="h-5 w-36" />
+            <Skeleton className="h-9 w-64" />
+          </div>
+        )}
         {isSuccess && (
           <Pagination
             totalPages={data.pagination.totalPages}

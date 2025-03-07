@@ -6,13 +6,14 @@ import { DialogTemplate } from "../../../ui/dialog/_index";
 import { useDialog } from "../../../ui/dialog/dialog-root";
 import { Skeleton } from "../../../ui/skeleton";
 
-export function UnselectAllClientsButton() {
+// Componente interno que usa o hook useDialog
+function UnselectAllClientsInner() {
   const { setOpen } = useDialog();
   const { data, isLoading, isSuccess } = useSelectedClientsGET({
     isSelected: true,
   });
-
   const { mutate: unselectClients } = useClientsBatchPATCH();
+
   function unselectAllClients() {
     unselectClients(
       {
@@ -34,7 +35,7 @@ export function UnselectAllClientsButton() {
   }
 
   return (
-    <DialogTemplate.Root>
+    <>
       {isLoading && <Skeleton className="h-8 w-full rounded" />}
       {isSuccess && (
         <DialogTemplate.Trigger className="border-primary hover:bg-muted text-primary flex w-full cursor-pointer items-center gap-1 rounded border bg-transparent px-6 py-3 text-sm font-bold">
@@ -65,6 +66,15 @@ export function UnselectAllClientsButton() {
           </div>
         </div>
       </DialogTemplate.Content>
+    </>
+  );
+}
+
+// Componente wrapper que fornece o contexto
+export function UnselectAllClientsButton() {
+  return (
+    <DialogTemplate.Root>
+      <UnselectAllClientsInner />
     </DialogTemplate.Root>
   );
 }

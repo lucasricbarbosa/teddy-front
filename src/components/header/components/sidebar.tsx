@@ -1,10 +1,4 @@
-import {
-  ContactRound,
-  Home,
-  LayoutGrid,
-  ListCheck,
-  UsersRound,
-} from "lucide-react";
+import { Home, LayoutGrid, UsersRound } from "lucide-react";
 import { SidebarTemplate } from "../../ui/sidebar/_index";
 
 const data = {
@@ -18,18 +12,6 @@ const data = {
       title: "Clientes",
       url: "/",
       icon: UsersRound,
-      subItems: [
-        {
-          title: "Clientes",
-          icon: ContactRound,
-          url: "/",
-        },
-        {
-          title: "Clientes selecionados",
-          icon: ListCheck,
-          url: "/clientes-selecionados",
-        },
-      ],
     },
     {
       title: "Produtos",

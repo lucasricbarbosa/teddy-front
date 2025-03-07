@@ -51,10 +51,18 @@ export function ClientsPerPageSelector({
             onChange={handleChange}
             className="border-border focus:border-primary focus:ring-primary block w-fit rounded-lg border bg-transparent px-2 py-1 text-xs"
           >
-            <option value="8">8</option>
-            <option value="16">16</option>
-            <option value="24">24</option>
-            <option value="32">32</option>
+            <option className="bg-background" value="8">
+              8
+            </option>
+            <option className="bg-background" value="16">
+              16
+            </option>
+            <option className="bg-background" value="24">
+              24
+            </option>
+            <option className="bg-background" value="32">
+              32
+            </option>
           </select>
         </form>
       </div>
