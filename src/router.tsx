@@ -5,6 +5,7 @@ import { LoginPage } from "./pages/public/login";
 import { ClientProvider } from "./components/clients/ClientsCard/context/clientContext";
 import { SelectedClients } from "./pages/auth/selected-clients";
 import { HomePage } from "./pages/public/home";
+import { InstitutionalLayout } from "./layouts/institutionalLayout";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/home",
+    Component: InstitutionalLayout,
     children: [
       {
         path: "/home",

@@ -3,7 +3,6 @@
 import { useState, useRef } from "react";
 import { ChevronDown, Github, Search, Sun } from "lucide-react";
 
-// Define types for our navigation items
 type NavItem = {
   title: string;
   description?: string;
@@ -76,8 +75,6 @@ export function NavigationMenu() {
   };
 
   const handleMouseLeave = () => {
-    // Add a small delay before closing the dropdown
-    // This gives the user time to move the mouse to the dropdown content
     timeoutRef.current = setTimeout(() => {
       setActiveItem(null);
     }, 100);

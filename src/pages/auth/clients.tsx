@@ -52,6 +52,13 @@ export function Clients() {
         totalClients={isSuccess ? data.pagination.total : undefined}
         isLoading={isLoading}
         onChange={handleClientsPerPageChange}
+        text={
+          isSuccess
+            ? data.clients.length === 1
+              ? "cliente encontrado"
+              : "clientes encontrados"
+            : ""
+        }
       />
       <div className="mt-5 flex flex-col gap-1">
         <span className="text-sm font-medium">Pesquisar por nome:</span>
