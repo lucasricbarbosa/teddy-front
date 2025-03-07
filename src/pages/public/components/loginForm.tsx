@@ -65,6 +65,7 @@ export function LoginForm({
         </div>
         <Button
           isloading={isLoading}
+          disabled={isLoading}
           type="submit"
           className="w-full cursor-pointer text-white"
         >
