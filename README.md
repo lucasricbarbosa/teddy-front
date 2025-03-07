@@ -17,6 +17,7 @@
 [TECH STACK & LIBS](#-tech-stack--libs) •
 [COMO INSTALAR](#-como-instalar) •
 [UTILIZANDO O SISTEMA](#-utilizando-o-sistema) •
+[TESTES](#-testes) •
 [OUTROS DETALHES TÉCNICOS](#-alguns-outros-detalhes-técnicos) •
 [CONSIDERAÇÕES FINAIS](#-considerações-finais) •
 [AGRADECIMENTOS](#-agradecimentos)**
@@ -61,6 +62,8 @@ As tecnologias e bibliotecas utilizadas neste projeto incluem:
 - **[ESLint](https://eslint.org/)** - Ferramenta para análise estática e correção de código.
 - **[Prettier](https://prettier.io/)** - Ferramenta de formatação de código.
 - **[Tanstack Query](https://tanstack.com/query/latest)** - biblioteca para gerenciamento de estado assíncrono.
+- **[Vitest](https://vitest.dev/)** - Framework de testes unitários rápido para Vite.
+- **[Playwright](https://playwright.dev/)** - Framework para testes end-to-end multiplataforma.
 
 <br />
 
@@ -68,19 +71,19 @@ As tecnologias e bibliotecas utilizadas neste projeto incluem:
 
 ## Configuração do Ambiente
 
-1. No diretório `frontend`, copie o arquivo de exemplo:
+1. No diretório frontend, copie o arquivo de exemplo:
 
 ```bash
 cp .env.example .env
 ```
 
-2. Insira a URL do backend na variável `VITE_API_HOST`, que corresponde ao endereço do servidor backend. Por exemplo:
+2. Insira a URL do backend na variável VITE_API_HOST, que corresponde ao endereço do servidor backend. Por exemplo:
 
 ```bash
 VITE_API_HOST=http://localhost:3000
 ```
 
-3. Insira a URL do frontend na variável `VITE_FRONT_HOST`, que corresponde ao endereço do frontend. Por exemplo:
+3. Insira a URL do frontend na variável VITE_FRONT_HOST, que corresponde ao endereço do frontend. Por exemplo:
 
 ```bash
 VITE_FRONT_HOST=http://localhost:5173
@@ -96,7 +99,7 @@ Instale o Node.js LTS na sua máquina e siga os passos abaixo:
 npm install
 ```
 
-2. Inicie o servidor de desenvolvimento (ou rode o script `./entrypoint.sh` que decide qual melhor comando de acordo com
+2. Inicie o servidor de desenvolvimento (ou rode o script ./entrypoint.sh que decide qual melhor comando de acordo com
    o seu ambiente:
 
 ```bash
@@ -117,9 +120,38 @@ Funcionalidades disponíveis:
 - Aparência Personalizada: Troque facilmente entre tema claro e escuro conforme sua preferência.
 - Design Adaptativo: Interface otimizada para computadores, tablets e smartphones.
 - Tela de início para conhecer melhor a Teddy Open Finance
-  <br/>
 
-# 📚 Outros detalhes...
+<br/>
+
+# 🧪 Testes
+
+Este projeto conta com uma suíte completa de testes que garante a qualidade e confiabilidade do código:
+
+## Testes Unitários
+
+Os testes unitários foram implementados utilizando Vitest, garantindo a validação dos componentes individuais e funções do sistema.
+
+Para executar os testes unitários:
+
+```bash
+npx vitest
+```
+
+## Testes End-to-End (E2E)
+
+Os testes end-to-end foram implementados com Playwright, validando o funcionamento completo da aplicação em cenários reais de uso.
+
+Para executar os testes end-to-end:
+
+```bash
+npx playwright test
+```
+
+A implementação de testes foi um requisito fundamental do processo seletivo, demonstrando a preocupação com a qualidade do código e a estabilidade da aplicação.
+
+<br/>
+
+# 📚 Alguns Outros Detalhes Técnicos
 
 - **Design Responsivo**:
    - A interface foi desenvolvida utilizando componentes personalizados para garantir adaptabilidade em qualquer dispositivo, proporcionando uma experiência consistente tanto em computadores quanto em smartphones.
@@ -150,4 +182,3 @@ Funcionalidades disponíveis:
 Este dashboard foi criado com dedicação e foco na qualidade para oferecer uma solução robusta e expansível. Além de cumprir todos os requisitos do teste, incorporei recursos adicionais que elevam tanto a experiência do usuário quanto a manutenibilidade do código.
 
 Estou à disposição para esclarecer quaisquer dúvidas ou receber feedback sobre o projeto. Espero que esta solução demonstre minhas habilidades e comprometimento com o desenvolvimento de qualidade! 💻✨
-<br />
