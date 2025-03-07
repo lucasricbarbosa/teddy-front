@@ -29,8 +29,6 @@ export function Clients() {
     };
   }, [searchTerm]);
 
-  console.log("API Host:", import.meta.env.VITE_API_HOST);
-
   const { data, isLoading, isSuccess } = useClientsGET({
     page: page,
     limit: clientsPerPage,

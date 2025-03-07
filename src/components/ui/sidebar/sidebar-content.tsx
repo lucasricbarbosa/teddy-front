@@ -61,8 +61,6 @@ export function SidebarBody({
   const currentPath = location.pathname;
   const { isOpen } = useSidebar();
 
-  console.log(currentPath);
-
   return (
     <nav className="h-full p-3 pt-10">
       <ul className="space-y-2">
