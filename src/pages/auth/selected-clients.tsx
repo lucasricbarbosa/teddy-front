@@ -37,7 +37,13 @@ export function SelectedClients() {
         totalClients={isSuccess ? data.pagination.total : undefined}
         isLoading={isLoading}
         onChange={handleClientsPerPageChange}
-        text="clientes selecionados encontrados"
+        text={
+          isSuccess
+            ? data.clients.length === 1
+              ? "cliente encontrado"
+              : "clientes encontrados"
+            : ""
+        }
       />
       {isLoading && (
         <div className="mt-5 grid grid-cols-1 gap-5 overflow-x-hidden min-[464px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
