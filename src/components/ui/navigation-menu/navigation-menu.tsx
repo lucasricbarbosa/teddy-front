@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 type NavItem = {
   title: string;
@@ -34,9 +35,6 @@ const navItems: NavItem[] = [
   {
     title: "White label",
   },
-  {
-    title: "Blog",
-  },
 ];
 
 export function NavigationMenu() {
@@ -70,6 +68,7 @@ export function NavigationMenu() {
                 className={`flex cursor-pointer items-center px-3 py-2 text-sm font-medium text-white transition-colors hover:text-white/90`}
               >
                 {item.title}
+
                 {item.children && <ChevronDown className="ml-1 h-4 w-4" />}
               </div>
 
@@ -96,6 +95,14 @@ export function NavigationMenu() {
             </div>
           </li>
         ))}
+        <li>
+          <Link
+            className="flex cursor-pointer items-center px-3 py-2 text-sm font-medium text-white transition-colors hover:text-white/90"
+            to={"/"}
+          >
+            Clientes
+          </Link>
+        </li>
       </ul>
     </nav>
   );
