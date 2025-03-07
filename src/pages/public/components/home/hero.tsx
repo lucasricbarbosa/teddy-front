@@ -12,9 +12,15 @@ export function Hero() {
   ];
   return (
     <main className="mx-auto flex max-w-7xl flex-col items-center justify-center py-44">
-      <h1 className="text-5xl font-bold">A SOLUÇÃO PERFEITA PARA</h1>
-      <FlipWords className="py-5 text-4xl font-medium" words={words} /> <br />
-      <p className="max-w-5xl text-center text-[26px]">
+      <h1 className="text-center text-2xl font-bold md:text-5xl">
+        A SOLUÇÃO PERFEITA PARA
+      </h1>
+      <FlipWords
+        className="py-5 text-xl font-medium md:text-4xl"
+        words={words}
+      />{" "}
+      <br />
+      <p className="max-w-5xl text-center text-lg md:text-[26px]">
         Conecte-se aos maiores Bancos e Fintechs do País e oferte as melhores
         opções de crédito do mercado aos seus clientes!
       </p>

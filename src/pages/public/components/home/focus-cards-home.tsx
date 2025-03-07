@@ -35,7 +35,7 @@ export function FocusCardsHome() {
   ];
 
   return (
-    <div className="pt-32">
+    <div className="px-4 pt-32 md:px-0">
       <div className="mx-auto max-w-7xl pb-16 text-center">
         <h3 className="text-4xl font-bold text-white">
           Conheça nossos serviços

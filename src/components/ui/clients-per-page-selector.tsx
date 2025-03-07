@@ -28,7 +28,7 @@ export function ClientsPerPageSelector({
   };
 
   return (
-    <div className="flex items-center justify-between gap-5">
+    <div className="flex flex-col justify-between gap-5 md:flex-row md:items-center">
       {!isLoading && totalClients !== undefined ? (
         <div className="flex items-center gap-1">
           <strong>{totalClients}</strong>

@@ -40,11 +40,11 @@ export function Pagination({
   }
 
   return (
-    <div className="flex items-center justify-between py-4">
+    <div className="flex flex-col justify-between py-4 md:flex-row md:items-center">
       <div className="text-muted-foreground text-sm">
         Mostrando {itemsShown} de {totalCount} itens
       </div>
-      <div className="text-right">
+      <div className="md:text-right">
         <div className="inline-flex items-center gap-8">
           <span className="text-sm font-medium">
             Página {totalPages === 0 ? "0" : pageIndex} de {totalPages}

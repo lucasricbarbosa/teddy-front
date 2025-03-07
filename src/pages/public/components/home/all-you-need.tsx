@@ -36,16 +36,16 @@ export function AllYouNeed() {
   ];
 
   return (
-    <div className="mx-auto grid max-w-7xl grid-cols-2 items-end gap-8 pb-12">
+    <div className="mx-auto grid max-w-7xl items-end gap-8 px-4 pb-12 md:grid-cols-2">
       <img
         src="https://teddydigital.io/wp-content/uploads/2024/05/Group-20-1.png"
         alt="Celular com o sistema Teddy"
       />
       <div className="flex flex-col">
-        <h3 className="text-primary text-3xl font-semibold">
+        <h3 className="text-primary text-center text-xl font-semibold md:text-3xl">
           A SOLUÇÃO PERFEITA PARA
         </h3>
-        <div className="mt-4 grid grid-cols-3 gap-5 pb-2">
+        <div className="mt-4 grid grid-cols-1 gap-5 pb-2 md:grid-cols-3">
           {items.map((item, index) => (
             <div
               key={index}

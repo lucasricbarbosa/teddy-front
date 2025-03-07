@@ -5,7 +5,7 @@ import { TeddyLogo } from "../../../components/teddyLogo";
 
 export function InstitutionalFooter() {
   return (
-    <footer className="container mx-auto mt-24 max-w-7xl">
+    <footer className="container mx-auto mt-24 max-w-7xl px-4 md:px-0">
       <FooterTop />
       <FooterBottom />
     </footer>
